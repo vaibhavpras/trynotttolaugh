@@ -36,7 +36,6 @@
     ]
   },
   "devDependencies": {
-    "webpack": "5.11.1",
-    "worker-loader": "^3.0.7"
+    "face-api.js": "^0.22.2"
   }
 }
