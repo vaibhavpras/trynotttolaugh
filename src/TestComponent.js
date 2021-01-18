@@ -32,11 +32,7 @@ function TestComponent() {
       console.log("Camera was initialized");
     });
 
-    let rand = 0;
-    setInterval(() => {
-      counter.current.innerHTML = rand;
-      rand++;
-    }, 100);
+  
   });
 
   const start = () => {
