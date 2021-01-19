@@ -3,42 +3,70 @@ import axios from "axios";
 
 export default function JokeCompnent() {
   const [jokeState, jokeStateSetter] = useState();
-  var msg
 
   const fetchAndNarrate = () => {
-    setInterval(() => {
     axios.get("https://v2.jokeapi.dev/joke/Any").then((res) => {
-        console.log(res.data);
-        if(res.data.type === "twopart"){
+      console.log(res.data);
+      //the returned joke is twopart ie. with a setup and a delivery
+      if (res.data.type === "twopart") {
         jokeStateSetter(res.data.setup);
+        //If speech synthesis compatible
         if ("speechSynthesis" in window) {
-          msg.text = res.data.setup;
-          window.speechSynthesis.speak(msg);
+          say(res.data.setup).then(() => {
+            setTimeout(() => {
+              jokeStateSetter(res.data.delivery);
+              if ("speechSynthesis" in window) {
+                say(res.data.delivery).then(() => {
+                  setTimeout(() => {
+                    fetchAndNarrate();
+                  }, 4000);
+                });
+              }
+            }, 2000);
+          });
+        //If speech synthesis not compatible
         } else {
+          setTimeout(() => {
+            jokeStateSetter(res.data.delivery);
+          }, 4000);
+          fetchAndNarrate();
         }
-        setTimeout(() => {
-          jokeStateSetter(res.data.delivery);
-          if ("speechSynthesis" in window) {
-            msg.text = res.data.delivery;
-            window.speechSynthesis.speak(msg);
-          }
-        }, 5000);
+      //the returned joke is in a single sentence
+      } else if (res.data.type === "single") {
+        jokeStateSetter(res.data.joke);
+        //If speech synthesis compatible
+        if ("speechSynthesis" in window) {
+          say(res.data.joke).then(() => {
+            setTimeout(() => {
+              fetchAndNarrate();
+            }, 4000);
+          });
+        } 
+        //If speech synthesis compatible
+        else {
+          setTimeout(() => {
+            jokeStateSetter(res.data.delivery);
+          }, 4000);
+          fetchAndNarrate();
+        }
       }
-      else if(res.data.type === "single"){
-          jokeStateSetter(res.data.joke);
-          if ("speechSynthesis" in window) {
-              msg.text = res.data.joke;
-              window.speechSynthesis.speak(msg);
-            }
+      //the returned joke is of neither type
+      else {
+        fetchAndNarrate();
       }
-      });}, 15000)
-  }
+    });
+  };
+
+  const say = function (text) {
+    return new Promise((resolve) => {
+      const utterance = new SpeechSynthesisUtterance(text);
+      utterance.onend = resolve;
+      speechSynthesis.speak(utterance);
+    });
+  };
 
   useEffect(() => {
-    msg = new SpeechSynthesisUtterance();
-    
-    fetchAndNarrate()    
-    
+    fetchAndNarrate();
   }, []);
   return (
     <div>
