@@ -3,7 +3,6 @@ import * as faceapi from "face-api.js";
 
 function TestComponent() {
   const video = useRef();
-  const counter = useRef();
   var temp;
   var isStarted = false;
 
@@ -63,6 +62,15 @@ function TestComponent() {
 
             if (happiness > 0.7) {
               console.log("you smiled!");
+              window.RUNNING = false
+              if (window.speechSynthesis.speaking)
+                window.speechSynthesis.cancel();
+              console.log("stopping detection")
+              if (isStarted) {
+                clearInterval(temp);
+              }
+              isStarted = false;
+              temp = false
             }
           } catch (e) {
             console.log(e);
@@ -79,7 +87,6 @@ function TestComponent() {
 
   return (
     <div>
-      <h1 ref={counter}></h1>
       <button onClick={start}>start</button>
       <button
         onClick={() => {
