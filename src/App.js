@@ -1,11 +1,11 @@
 import './App.css';
-import JokeCompnent from './JokeCompnent';
+import JokeComponent from './JokeComponent';
 import TestComponent from './TestComponent';
 
 function App() {
   return (
     <div className="App">
-      <JokeCompnent></JokeCompnent>
+      <JokeComponent></JokeComponent>
       <TestComponent></TestComponent>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useRef, useEffect } from "react";
 
-export default function JokeCompnent() {
+export default function JokeComponent() {
 
   const output = useRef();
 
