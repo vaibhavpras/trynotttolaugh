@@ -1,12 +1,11 @@
 import './App.css';
-import JokeComponent from './JokeComponent';
+import MainGameComponent from './MainGameComponent';
 import TestComponent from './TestComponent';
 
 function App() {
   return (
     <div className="App">
-      <JokeComponent></JokeComponent>
-      <TestComponent></TestComponent>
+      <MainGameComponent></MainGameComponent>
     </div>
   );
 }

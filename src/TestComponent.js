@@ -1,10 +1,14 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
-function TestComponent() {
+function TestComponent(props) {
   const video = useRef();
-  var temp;
+  var intervalRef;
   var isStarted = false;
+
+  const [show, setShow] = useState(false);
 
   const initCamera = async (width, height) => {
     console.log("initing camera");
@@ -26,15 +30,7 @@ function TestComponent() {
     });
   };
 
-  useEffect(() => {
-    initCamera(320, 240).then((video) => {
-      console.log("Camera was initialized");
-    });
-
-  
-  });
-
-  const start = () => {
+  const startEmotionDetection = () => {
     isStarted = true;
     const MODEL_URL = process.env.PUBLIC_URL + "/models";
 
@@ -45,8 +41,8 @@ function TestComponent() {
       faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
     ]).then(() => {
       console.log("started reading");
-      if (!temp) {
-        temp = setInterval(async () => {
+      if (!intervalRef) {
+        intervalRef = setInterval(async () => {
           let happiness;
 
           try {
@@ -62,15 +58,16 @@ function TestComponent() {
 
             if (happiness > 0.7) {
               console.log("you smiled!");
-              window.RUNNING = false
+              window.RUNNING = false;
               if (window.speechSynthesis.speaking)
                 window.speechSynthesis.cancel();
-              console.log("stopping detection")
+              console.log("stopping detection");
               if (isStarted) {
-                clearInterval(temp);
+                clearInterval(intervalRef);
               }
               isStarted = false;
-              temp = false
+              intervalRef = false;
+              setShow(true);
             }
           } catch (e) {
             console.log(e);
@@ -85,23 +82,47 @@ function TestComponent() {
     });
   };
 
+  const handleModalClose = () => {
+    setShow(false);
+    props.onGameRestart();
+    startEmotionDetection();
+  };
+
+  useEffect(() => {
+    initCamera(320, 240).then((video) => {
+      console.log("Camera was initialized");
+    });
+    startEmotionDetection();
+  }, []);
+
   return (
     <div>
-      <button onClick={start}>start</button>
-      <button
-        onClick={() => {
-          if (isStarted) {
-            clearInterval(temp);
-          }
-          isStarted = false;
-          temp = false
-        }}
-      >
-        stop
-      </button>
       <video ref={video} autoPlay muted playsInline></video>
+
+      <Modal
+        show={show}
+        onHide={handleModalClose}
+        backdrop="static"
+        animation="true"
+        style={{ width: "100VW", height: "100VH" }}
+      >
+        <Modal.Header>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          I will not close if you click outside me. Don't even try to press
+          escape key.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleModalClose}>
+            Restart
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
 
-export default TestComponent;
+const areEqual = (prevProps, nextProps) => true;
+
+export default React.memo(TestComponent, areEqual);
