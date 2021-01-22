@@ -42,7 +42,11 @@ function TestComponent(props) {
     ]).then(() => {
       console.log("started reading");
       if (!intervalRef) {
+
         intervalRef = setInterval(async () => {
+
+    
+          setShow(false)
           let happiness;
 
           try {
@@ -71,6 +75,8 @@ function TestComponent(props) {
             }
           } catch (e) {
             console.log(e);
+            setShow(true)
+
           }
           // const resizedDetections = faceapi.resizeResults(detections, displaySize)
           // canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)

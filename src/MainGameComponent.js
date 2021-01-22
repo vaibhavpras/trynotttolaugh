@@ -1,11 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
+import { useLocation } from 'react-router-dom';
 import TestComponent from "./TestComponent";
 
-export default function MainGameComponent() {
+export default function MainGameComponent(props) {
   const output = useRef();
 
   const [score, scoreSetter] = useState(0);
   const [highScore, highScoreSetter] = useState(0);
+
+  const location = useLocation()
 
   const delay = (t) =>
     new Promise((resolve) =>
@@ -22,8 +25,9 @@ export default function MainGameComponent() {
   };
 
   const fetchAndNarrate = async () => {
+    console.log(location.state.type)
     while (window.RUNNING) {
-      var res = await fetch("https://v2.jokeapi.dev/joke/Any");
+      var res = await fetch(`https://v2.jokeapi.dev/joke/${location.state.type}?blacklistFlags=explicit`);      
       var json = await res.json();
       if ("speechSynthesis" in window) {
         if (json.type === "twopart") {
@@ -63,6 +67,7 @@ export default function MainGameComponent() {
   };
 
   const onGameRestart = () => {
+    output.current.innerHTML = ''
     scoreSetter(0);
     window.RUNNING = true;
     fetchAndNarrate();
@@ -79,12 +84,6 @@ export default function MainGameComponent() {
 
   return (
     <div>
-      {/* <button
-        onClick={() => {
-          window.RUNNING = true;
-          fetchAndNarrate();
-        }}
-      >Start joke</button> */}
       <div>Score: {score}</div>
       <div>High Score: {highScore}</div>
       <div ref={output}></div>
