@@ -1,0 +1,51 @@
+body {
+  font-family: "Inter", sans-serif;
+  background-color: black;
+  color: white;
+}
+
+.container{
+  padding: 5vw;
+}
+
+.title{
+  font-size: 3vw;
+}
+
+.prompt{
+  display: flex;
+  flex-direction: row;
+  margin-top: 5vw;
+  font-size: 2vw;
+}
+
+.dropdown{
+  margin-top: 3vw;
+  margin-right: 1vw;
+  background: transparent;
+  border: none;
+  border-bottom: 0.2vw solid orange;
+  text-indent: 0.01px;
+  text-overflow: '';
+  color: white;
+  font-size: 2vw;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+.submit-container{
+  margin-top: 4vw
+}
+
+.submit-btn{
+  width: 10vw;
+  height: 4vw;
+  background-color: orange;
+  border: 0;
+  color: black;
+  font-size: 1.7vw;
+  font-weight: bold;
+  -webkit-appearance: none;
+}
+
+

@@ -9,6 +9,7 @@ function TestComponent(props) {
   var isStarted = false;
 
   const [show, setShow] = useState(false);
+  const [cantSee, setCantSee] = useState(false);
 
   const initCamera = async (width, height) => {
     console.log("initing camera");
@@ -42,11 +43,7 @@ function TestComponent(props) {
     ]).then(() => {
       console.log("started reading");
       if (!intervalRef) {
-
         intervalRef = setInterval(async () => {
-
-    
-          setShow(false)
           let happiness;
 
           try {
@@ -56,6 +53,7 @@ function TestComponent(props) {
                 new faceapi.TinyFaceDetectorOptions()
               )
               .withFaceExpressions();
+              setCantSee(false)
             if (detections.expressions.hasOwnProperty("happy")) {
               happiness = detections.expressions.happy;
             }
@@ -75,8 +73,7 @@ function TestComponent(props) {
             }
           } catch (e) {
             console.log(e);
-            setShow(true)
-
+            setCantSee(true)
           }
           // const resizedDetections = faceapi.resizeResults(detections, displaySize)
           // canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
@@ -104,6 +101,7 @@ function TestComponent(props) {
   return (
     <div>
       <video ref={video} autoPlay muted playsInline></video>
+      {cantSee? <div>Can's see you</div> : null}
 
       <Modal
         show={show}

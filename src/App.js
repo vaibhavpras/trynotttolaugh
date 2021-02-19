@@ -1,3 +1,5 @@
+import React from 'react'
+
 import "./App.css";
 import MainGameComponent from "./MainGameComponent";
 import StartComponent from "./StartComponent";
