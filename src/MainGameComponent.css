@@ -1,0 +1,96 @@
+.main-game-container {
+  font-family: "Inter", sans-serif;
+  width: 80%;
+  height: 80%;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+}
+
+.break {
+  flex-basis: 100%;
+  height: 0;
+}
+
+.joke-text-container {
+  border-radius: 10px;
+  background: orange;
+  width: 60%;
+  height: 60%;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+}
+
+.joke-text {
+  text-align: center;
+  width: 100%;
+  font-size: 180%;
+  color: black;
+  padding: 10vw;
+}
+
+.stream {
+  border-radius: 10px;
+  width: 20vh;
+  height: 14.95vh;
+}
+
+.scores-container {
+  align-items: flex-start;
+}
+
+.score {
+  margin-top: 10px;
+  font-size: 180%;
+}
+
+.high-score {
+  font-size: 150%;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-items: center;
+  background-color: black;
+}
+
+.modal-header {
+  margin: 10vw 10vw 3vw;
+  font-size: 5vw;
+}
+
+.modal-body {
+  margin: 0 10vw 3vw;
+  font-size: 2vw;
+}
+
+.modal-footer {
+  margin: 0 10vw 3vw;
+  font-size: 2vw;
+}
+
+.modal-footer Button{
+    margin-right: 3vw;
+    display: inline-block;
+    width:7vw;
+    height: 3vw;
+    background-color:orange;
+    border: 0;
+    -webkit-appearance: none;
+    color: black;
+    font-size: 1vw;
+    font-weight: bold;
+    border-radius: 10px;
+}

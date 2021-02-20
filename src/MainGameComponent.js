@@ -1,6 +1,7 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
 import TestComponent from "./TestComponent";
+import './MainGameComponent.css';
 
 export default function MainGameComponent(props) {
   const output = useRef();
@@ -83,11 +84,16 @@ export default function MainGameComponent(props) {
   }, [score]);
 
   return (
-    <div>
-      <div>Score: {score}</div>
-      <div>High Score: {highScore}</div>
-      <div ref={output}></div>
-      <TestComponent onGameRestart={onGameRestart}></TestComponent>
+    <div className='main-game-container'>
+      <div className='joke-text-container'><text className='joke-text' ref={output}/></div>
+      <div class="break"></div>
+      <div className='score-container'>
+      <div className='score'>Score: {score}</div>
+      <div class="break"></div>
+      <div className='high-score'>High Score: {highScore}</div>
+      </div>
+      <div class="break"></div>
+      <TestComponent onGameRestart={onGameRestart} score={score} highScore={highScore}></TestComponent>
     </div>
   );
 }

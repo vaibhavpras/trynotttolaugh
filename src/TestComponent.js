@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import * as faceapi from "face-api.js";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import { useHistory } from "react-router-dom";
+
 
 function TestComponent(props) {
   const video = useRef();
@@ -11,16 +13,14 @@ function TestComponent(props) {
   const [show, setShow] = useState(false);
   const [cantSee, setCantSee] = useState(false);
 
-  const initCamera = async (width, height) => {
+  const history = useHistory();
+
+  const initCamera = async () => {
     console.log("initing camera");
-    video.current.width = width;
-    video.current.height = height;
     const stream = await navigator.mediaDevices.getUserMedia({
       audio: false,
       video: {
         facingMode: "user",
-        width: width,
-        height: height,
       },
     });
     video.current.srcObject = stream;
@@ -53,7 +53,7 @@ function TestComponent(props) {
                 new faceapi.TinyFaceDetectorOptions()
               )
               .withFaceExpressions();
-              setCantSee(false)
+            setCantSee(false);
             if (detections.expressions.hasOwnProperty("happy")) {
               happiness = detections.expressions.happy;
             }
@@ -73,7 +73,7 @@ function TestComponent(props) {
             }
           } catch (e) {
             console.log(e);
-            setCantSee(true)
+            setCantSee(true);
           }
           // const resizedDetections = faceapi.resizeResults(detections, displaySize)
           // canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height)
@@ -85,14 +85,21 @@ function TestComponent(props) {
     });
   };
 
-  const handleModalClose = () => {
+  const handleRestart = () => {
     setShow(false);
     props.onGameRestart();
     startEmotionDetection();
   };
 
+  const handleGoHome = () => {
+    setShow(false);
+    history.replace({
+      pathname: "/home",
+    });
+  };
+
   useEffect(() => {
-    initCamera(320, 240).then((video) => {
+    initCamera().then((video) => {
       console.log("Camera was initialized");
     });
     startEmotionDetection();
@@ -100,26 +107,28 @@ function TestComponent(props) {
 
   return (
     <div>
-      <video ref={video} autoPlay muted playsInline></video>
-      {cantSee? <div>Can's see you</div> : null}
+      <video ref={video} autoPlay muted playsInline className="stream"></video>
+      {cantSee ? <div>Can's see you</div> : null}
 
       <Modal
         show={show}
-        onHide={handleModalClose}
-        backdrop="static"
         animation="true"
-        style={{ width: "100VW", height: "100VH" }}
+        className="modal"
+        overlayClassName="modal-overlay"
       >
-        <Modal.Header>
-          <Modal.Title>Modal title</Modal.Title>
+        <Modal.Header className='modal-header'>
+          <Modal.Title>You Lost!</Modal.Title>
         </Modal.Header>
-        <Modal.Body>
-          I will not close if you click outside me. Don't even try to press
-          escape key.
+        <Modal.Body className='modal-body'>
+          <div>score: {props.score}</div>
+          <div>high score: {props.highScore}</div>
         </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleModalClose}>
+        <Modal.Footer className='modal-footer'>
+          <Button onClick={handleRestart}>
             Restart
+          </Button>
+          <Button onClick={handleGoHome}>
+            Home
           </Button>
         </Modal.Footer>
       </Modal>
