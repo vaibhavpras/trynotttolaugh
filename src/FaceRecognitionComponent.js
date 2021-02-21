@@ -15,12 +15,16 @@ function TestComponent(props) {
 
   const history = useHistory();
 
-  const initCamera = async () => {
+  const initCamera = async (width, height) => {
     console.log("initing camera");
-    const stream = await navigator.mediaDevices.getUserMedia({
+    video.current.width=width;
+    video.current.height=height; 
+    const stream = await navigator.mediaDevices.getUserMedia({ 
       audio: false,
       video: {
         facingMode: "user",
+        width: width,
+        height: height,
       },
     });
     video.current.srcObject = stream;
@@ -99,7 +103,7 @@ function TestComponent(props) {
   };
 
   useEffect(() => {
-    initCamera().then((video) => {
+    initCamera(320,240).then((video) => {
       console.log("Camera was initialized");
     });
     startEmotionDetection();
@@ -107,8 +111,8 @@ function TestComponent(props) {
 
   return (
     <div>
-      <video ref={video} autoPlay muted playsInline className="stream"></video>
-      {cantSee ? <div>Can's see you</div> : null}
+      <video ref={video} autoPlay muted playsInline className="stream" style={{borderColor: `${cantSee? "red" : "#FFE263"}`}}></video>
+      {cantSee ? <div className='cant-see-warning'> <text> Can't see your face! </text></div> : null}
 
       <Modal
         show={show}

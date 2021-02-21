@@ -1,6 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useLocation } from 'react-router-dom';
-import TestComponent from "./TestComponent";
+import FaceRecognitionComponent from "./FaceRecognitionComponent";
 import './MainGameComponent.css';
 
 export default function MainGameComponent(props) {
@@ -85,6 +85,7 @@ export default function MainGameComponent(props) {
 
   return (
     <div className='main-game-container'>
+    <div className='joke-components-container'>
       <div className='joke-text-container'><text className='joke-text' ref={output}/></div>
       <div class="break"></div>
       <div className='score-container'>
@@ -93,7 +94,8 @@ export default function MainGameComponent(props) {
       <div className='high-score'>High Score: {highScore}</div>
       </div>
       <div class="break"></div>
-      <TestComponent onGameRestart={onGameRestart} score={score} highScore={highScore}></TestComponent>
+    </div>
+    <FaceRecognitionComponent onGameRestart={onGameRestart} score={score} highScore={highScore}></FaceRecognitionComponent>
     </div>
   );
 }

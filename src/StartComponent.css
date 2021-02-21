@@ -1,51 +1,92 @@
 body {
+  background-color: #ffe263;
+}
+
+.outer-container {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  font-size: 2vw;
+  color: black;
   font-family: "Inter", sans-serif;
-  background-color: black;
-  color: white;
+  width: 100vw;
+  height: 100vh;
+  display: block;
 }
 
-.container{
-  padding: 10vw;
+.title {
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
-.title{
-  font-size: 3vw;
+.prompt {
+  margin-top: 2em;
 }
 
-.prompt{
-  display: flex;
-  flex-direction: row;
-  margin-top: 5vw;
-  font-size: 2vw;
-}
-
-.dropdown{
-  margin-top: 3vw;
-  margin-right: 1vw;
-  background: transparent;
+.dropdown {
   border: none;
-  border-bottom: 0.2vw solid orange;
-  text-indent: 0.01px;
-  text-overflow: '';
-  color: white;
-  font-size: 2vw;
+  border-bottom: 0.1em solid orange;
+  text-align: center;
+  text-overflow: "";
+  font-size: 1em;
+  color: black;
+  background: transparent;
   -webkit-appearance: none;
   -moz-appearance: none;
 }
 
-.submit-container{
-  margin-top: 4vw
+.submit-btn-container {
+  margin-top: 2em;
 }
 
-.submit-btn{
-  width: 10vw;
-  height: 4vw;
-  background-color: orange;
+.submit-btn {
+  box-shadow: 0.2em 0.2em 0.6em #d9c054, -0.2em -0.2em 0.6em #ffff72;
   border: 0;
-  color: black;
-  font-size: 1.7vw;
+  border-style: solid;
+  border-width: 0.2em;
+  border-color: #ffe263;
+  border-radius: 2em;
+  width: 7em;
+  height: 3em;
+  font-size: 0.7em;
   font-weight: bold;
+  color: black;
+  background-color: #ffa500;
   -webkit-appearance: none;
 }
 
+.disclaimer {
+  margin-top: 3em;
+  font-size: 0.5em;
+  color: orange;
+}
 
+@media only screen and (max-width: 600px) {
+  .outer-container {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    font-size: 4vw;
+  }
+
+  .title {
+    padding-top: 3em;
+    text-align: center;
+  }
+
+  .prompt {
+    margin-top: 3em;
+    display: flex;
+    justify-content: center;
+  }
+
+  .submit-btn-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .disclaimer {
+    padding: 6em;
+    margin-top: 0em;
+  }
+}
