@@ -3,14 +3,13 @@ body {
 }
 
 .outer-container {
-  position: absolute;
-  top: 10%;
-  left: 10%;
+  padding-top: 10%;
+  padding-left: 10%;
   font-size: 2vw;
   color: black;
   font-family: "Inter", sans-serif;
-  width: 100vw;
-  height: 100vh;
+  width: 85vw;
+  height: 79vh;
   display: block;
 }
 

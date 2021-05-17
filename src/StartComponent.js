@@ -28,15 +28,15 @@ function StartComponent() {
       <div className='prompt'>
 
       <form onSubmit={handleSubmit}>
-
+      <label className='label'> I find </label>
         <select className="dropdown" value={selectState} onChange={handleChange} >
-          <option value="Any">All Jokes</option>
-          <option value="Programming">Programming Jokes</option>
-          <option value="Pun">Puns</option>
-          <option value="Dark">Dark Jokes</option>
+          <option value="Any">all kinds of</option>
+          <option value="Programming">programming jokes</option>
+          <option value="Pun">puns</option>
+          <option value="Dark">dark jokes</option>
         </select>
 
-        <label className='label'>are kind of funny. </label>
+        <label className='label'> funny. </label>
 
         <div className='submit-btn-container'><input type="submit" value="start" className='submit-btn'></input></div>
 
