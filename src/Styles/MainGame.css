@@ -1,4 +1,4 @@
-.main-game-container {
+.outer-container {
   background-image: linear-gradient(to bottom right, #6b2cf5, #d450e6);
   font-size: 2vw;
   color: black;
@@ -12,7 +12,7 @@
   text-align: center;
 }
 
-.joke-components-container {
+.game-hud-container {
   font-size: 2vw;
   font-family: "Inter", sans-serif;
   width: 100vw;

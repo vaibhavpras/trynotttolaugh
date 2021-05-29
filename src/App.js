@@ -1,8 +1,6 @@
 import React from 'react'
-
-import "./App.css";
-import MainGameComponent from "./MainGameComponent";
-import StartComponent from "./StartComponent";
+import MainGame from "./Components/MainGame.js";
+import Home from "./Components/Home.js";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import ReactDOM from "react-dom";
 
@@ -10,8 +8,8 @@ function App() {
   return (
     <div>
       <Switch>
-        <Route path="/game" component={MainGameComponent} />
-        <Route path="/" component={StartComponent} />
+        <Route exact path="/" component={Home} />
+        <Route path="/game" component={MainGame} />
       </Switch>
     </div>
   );
