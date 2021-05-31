@@ -49,13 +49,14 @@ const EmotionDetection = forwardRef((props, ref) => { //forwardRef in order to h
         intervalRef = setInterval(async () => { //repeat below code every 100ms
           let happiness; //used to store current happiness level on user's face
           try {
-            setCantSee(false);
             const detections = await faceapi //detect user's emotion at the current moment
               .detectSingleFace(
                 video.current, //gets input from <video> stream
                 new faceapi.TinyFaceDetectorOptions()
               )
               .withFaceExpressions();
+
+              setCantSee(false);
 
             //if user's current emotion is happy, store the level of happiness in the variable
             if (detections.expressions.hasOwnProperty("happy")) {
@@ -64,7 +65,7 @@ const EmotionDetection = forwardRef((props, ref) => { //forwardRef in order to h
 
             //If happiness level is > 0.7 (out of 1), it is considered as a smile or laugh for this game
             if (happiness > 0.7) {
-              window.RUNNING = false; //let fetch function in parent know that the user smiled and the game is over
+              window.RUNNING = false; //let fetchAndNarrate() function in parent know that the user smiled and the game is over
 
               if (window.speechSynthesis.speaking)
                 window.speechSynthesis.cancel(); //stop joke narration
@@ -96,17 +97,18 @@ const EmotionDetection = forwardRef((props, ref) => { //forwardRef in order to h
     }
   }, [gameOver]);
 
+
   //Initialize <video> with camera stream on component render
   useEffect(() => {
     initCamera(320,240).then((video) => {
     });
     startEmotionDetection();
-  });
+  }, []);
 
   return (
     <div>
       <video ref={video} autoPlay muted playsInline className="stream" style={{borderColor: `${cantSee? "red" : "#FFE263"}`}}></video>
-      {cantSee ? <text className='cant-see-warning'> Can't see your face! </text> : null}
+      {cantSee ? <text className='cant-see-warning'> CAN'T SEE YOUR FACE! </text> : null}
     </div>
   );
 });

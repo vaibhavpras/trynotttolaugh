@@ -1,98 +1,104 @@
-.outer-container{
-  height: 100vh;
-  width: 100vw;
-  position: absolute;
-  background-image: linear-gradient(to bottom right, #6b2cf5, #d450e6);
+body {
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  .outer-container {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    background-image: linear-gradient(to bottom right, #6b2cf5, #d450e6);
+    font-family: "Inter", sans-serif;
+  }
+
+  .inner-container {
+    height: 80%;
+    width: 60%;
+    position: absolute;
+    top: 10%;
+    left: 20%;
+    font-size: 8vw;
+    color: black;
+  }
+
+  .card {
+    height: 70%;
+    width: 100%;
+    max-height: 70%;
+    background: #ffd42d;
+    border-radius: 50px;
+    -webkit-border-radius: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    color: black;
+  }
+
+  .title {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    font-size: 5vh;
+    font-weight: bold;
+  }
+
+  .prompt {
+    flex-grow: 4.5;
+    display: flex;
+    align-items: center;
+    font-size: 0.3em;
+  }
+
+  .dropdown {
+    border: 0;
+    border-bottom: 2px solid black;
+    text-align: center;
+    background: transparent;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    font-size: 1em;
+    color: black;
+  }
+
+  .submit-btn-container {
+    flex-grow: 4.5;
+    display: flex;
+    align-items: center;
+  }
+
+  .submit-btn {
+    border: 0.1em solid rgba(246, 172, 0, 0.883);
+    border-radius: 1em;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-top: 0.5em;
+    padding-bottom: 0.5em;
+    background-color: rgba(246, 172, 0, 0.863);
+    text-transform: uppercase;
+    font-weight: bold;
+    -webkit-appearance: none;
+    font-size: 3vh;
+    color: black;
+    cursor: pointer;
+  }
+
+  .submit-btn:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+  }
+
+  .disclaimer {
+    margin-left: 5%;
+    margin-top: 3%;
+    padding: 1em;
+    text-align: left;
+    font-size: 1.5vh;
+    color: white;
 }
 
-.inner-container {
-  height: 80%;
-  width: 60%;
-  position: absolute;
-  top: 10%;
-  left: 20%;
-  font-size: 8vw;
-  font-family: "Inter", sans-serif;
-  color: black;
-}
-
-.card {
-  height: 70%;
-  width: 100%;
-  max-height: 70%;
-  background: #ffd42d;
-  border-radius: 50px;
-  -webkit-border-radius: 50px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  color: black;
-}
-
-.title {
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  font-size: 5vh;
-  font-weight: bold;
-}
-
-.prompt {
-  flex-grow: 4.5;
-  display: flex;
-  align-items: center;
-  font-size: 0.3em;
-}
-
-.dropdown {
-  border: 0;
-  border-bottom: 2px solid black;
-  text-align: center;
-  background: transparent;
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  font-size: 1em;
-  color: black;
-}
-
-.submit-btn-container {
-  flex-grow: 4.5;
-  display: flex;
-  align-items: center;
-}
-
-.submit-btn {
-  border: 0.1em solid rgba(246, 172, 0, 0.883);
-  border-radius: 1em;
-  padding-left: 2em;
-  padding-right: 2em; 
-  padding-top: 0.5em;
-  padding-bottom: 0.5em; 
-  background-color: rgba(246, 172, 0, 0.863);
-  text-transform: uppercase;
-  font-weight: bold;
-  -webkit-appearance: none;
-  font-size: 3vh;
-  color: black;
-  cursor: pointer;
-}
-
-.submit-btn:hover {
-  background-color: rgba(255, 255, 255, 0.6);
-}
-
-.disclaimer {
-  margin-left: 5%;
-  margin-top: 3%;
-  padding: 1em;
-  text-align: left;
-  font-size: 1.5vh;
-  color: white;
-}
-
-@media only screen and (max-width: 350px) {
-  .inner-container{
+/* Mobile devices */
+@media only screen and (max-width: 480px) {
+  .inner-container {
     left: 5%;
     width: 90%;
   }
@@ -107,8 +113,9 @@
   }
 }
 
-@media only screen and (min-width:350px) and (max-width:800px){
-  .inner-container{
+/* Tablets and iPads portraits */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .inner-container {
     left: 10%;
     width: 80%;
   }

@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import EmotionDetection from "./EmotionDetection";
 import "../Styles/MainGame.css";
+import laugh from "../Assets/laugh.png";
 
 export default function MainGame(props) {
   const jokeTextRef = useRef(); //Reference to the card that holds our fetched jokeText
@@ -109,7 +110,7 @@ export default function MainGame(props) {
   useEffect(() => {
     window.RUNNING = true;
     fetchAndNarrate();
-  });
+  }, []);
 
   //check for highscore on each score change
   useEffect(() => {
@@ -127,23 +128,32 @@ export default function MainGame(props) {
           <text className="high-score">High Score: {highScore}</text>
         </div>
       </div>
-      <EmotionDetection ref={emotionDetectionRef} onGameOver={onGameOver} />
+      <EmotionDetection ref={emotionDetectionRef} onGameOver={onGameOver}/>
       <Modal
         show={showGameOverModal}
         animation="true"
         className="modal"
-        overlayClassName="modal-overlay">
-        <Modal.Header className="modal-header">
-          <Modal.Title>You Lost!</Modal.Title>
-        </Modal.Header>
-        <Modal.Body className="modal-body">
-          <div>score: {score}</div>
-          <div>high score: {highScore}</div>
-        </Modal.Body>
-        <Modal.Footer className="modal-footer">
-          <Button onClick={handleRestart}>Restart</Button>
-          <Button onClick={handleGoHome}>Home</Button>
-        </Modal.Footer>
+        overlayClassName="modal-overlay"
+      >
+        <div className="modal-card">
+          <div className="modal-header">
+            <Modal.Header>
+              <div className="laugh-img-container"> </div>
+              <img className="laugh-img" src={laugh} alt="" />
+            </Modal.Header>
+          </div>
+          <Modal.Body className="modal-body">
+            <div className="modal-title">GOT YOU!</div>
+            <div className="modal-scores">
+              <div>score: {score}</div>
+              <div>high score: {highScore}</div>
+            </div>
+          </Modal.Body>
+          <Modal.Footer className="modal-footer">
+            <Button className='modal-button' onClick={handleRestart}>Restart</Button>
+            <Button className='modal-button' onClick={handleGoHome}>Home</Button>
+          </Modal.Footer>
+        </div>
       </Modal>
     </div>
   );
