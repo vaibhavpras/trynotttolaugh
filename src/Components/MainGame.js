@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useState } from "react";
 import { useLocation, useHistory } from "react-router-dom";
+import { Pulse } from "css-spinners-react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import EmotionDetection from "./EmotionDetection";
@@ -11,6 +12,7 @@ export default function MainGame(props) {
   const emotionDetectionRef = useRef(); //Reference to the EmotionDetection component
   const history = useHistory(); //To access state of the router and navigate to StartComponent
   const location = useLocation(); //Used to access the passed query param for our JoekAPI call
+  const [modelsLoaded, setModelsLoaded] = useState(false); //Used to display a loading screen till the models load
   const [score, setScore] = useState(0); //Contains state of score
   const [highScore, setHighScore] = useState(0); //Contains state of highScore
   const [showGameOverModal, setShowGameOverModal] = useState(false); //Used to control the display of the 'game over' modal
@@ -83,6 +85,13 @@ export default function MainGame(props) {
     }
   };
 
+  //Gets rid of loading screen when models are loaded
+  const onModelsLoaded = () => {
+    setModelsLoaded(true);
+    window.RUNNING = true;
+    fetchAndNarrate();
+  };
+
   //handles game over event
   const onGameOver = () => {
     setShowGameOverModal(true); //draw the game-over modal
@@ -106,12 +115,6 @@ export default function MainGame(props) {
     });
   };
 
-  //Start fetching after render
-  useEffect(() => {
-    window.RUNNING = true;
-    fetchAndNarrate();
-  }, []);
-
   //check for highscore on each score change
   useEffect(() => {
     if (score > highScore) setHighScore(score);
@@ -119,16 +122,26 @@ export default function MainGame(props) {
 
   return (
     <div className="outer-container">
-      <div className="game-hud-container">
-        <div className="joke-text-container">
-          <text className="joke-text" ref={jokeTextRef} />
+      {modelsLoaded ? (
+        <div className="game-hud-container">
+          <div className="joke-text-container">
+            <text className="joke-text" ref={jokeTextRef} />
+          </div>
+          <div className="scores-container">
+            <text className="score">Score: {score}</text>
+            <text className="high-score">High Score: {highScore}</text>
+          </div>
         </div>
-        <div className="scores-container">
-          <text className="score">Score: {score}</text>
-          <text className="high-score">High Score: {highScore}</text>
+      ) : (
+        <div className="loading-animation">
+            <Pulse />
         </div>
-      </div>
-      <EmotionDetection ref={emotionDetectionRef} onGameOver={onGameOver}/>
+      )}
+      <EmotionDetection
+        ref={emotionDetectionRef}
+        onModelsLoaded={onModelsLoaded}
+        onGameOver={onGameOver}
+      />
       <Modal
         show={showGameOverModal}
         animation="true"
@@ -150,8 +163,12 @@ export default function MainGame(props) {
             </div>
           </Modal.Body>
           <Modal.Footer className="modal-footer">
-            <Button className='modal-button' onClick={handleRestart}>Restart</Button>
-            <Button className='modal-button' onClick={handleGoHome}>Home</Button>
+            <Button className="modal-button" onClick={handleRestart}>
+              Restart
+            </Button>
+            <Button className="modal-button" onClick={handleGoHome}>
+              Home
+            </Button>
           </Modal.Footer>
         </div>
       </Modal>

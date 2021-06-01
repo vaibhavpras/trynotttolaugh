@@ -45,6 +45,7 @@ const EmotionDetection = forwardRef((props, ref) => { //forwardRef in order to h
       faceapi.nets.faceRecognitionNet.loadFromUri(MODEL_URL),
       faceapi.nets.faceExpressionNet.loadFromUri(MODEL_URL),
     ]).then(() => {
+      props.onModelsLoaded();
       if (!intervalRef) { //start setInterval() only if it isn't running already
         intervalRef = setInterval(async () => { //repeat below code every 100ms
           let happiness; //used to store current happiness level on user's face
