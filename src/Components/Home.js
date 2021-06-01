@@ -4,6 +4,12 @@ import "../Styles/Home.css";
 
 function Home() {
 
+  //Getting custom height property to account for url-bar on mobile devices 
+  window.addEventListener('resize', () => {
+    let vh = window.innerHeight * 0.01;
+    document.documentElement.style.setProperty('--vh', `${vh}px`);
+  });
+
   const history = useHistory();
   //Keeps track of user's current selected joke choice
   const [selectState, selectStateSetter] = useState({

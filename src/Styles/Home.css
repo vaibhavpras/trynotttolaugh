@@ -1,10 +1,15 @@
+html,body{
+  height: 100vh; /* Fallback for browsers that do not support Custom Properties */
+  height: calc(var(--vh, 1vh) * 100);
+}
+
 body {
     margin: 0 !important;
     padding: 0 !important;
   }
 
   .outer-container {
-    height: 100vh;
+    height: 100%;
     width: 100vw;
     position: absolute;
     background-image: linear-gradient(to bottom right, #6b2cf5, #d450e6);
