@@ -2,7 +2,7 @@
   position: absolute;
 }
 
-.loading-animation{
+.loading-animation {
   position: absolute;
   top: 25%;
   left: 25%;
@@ -42,13 +42,13 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  color: black;
-  
+  color: black;  
 }
 
 .joke-text {
   padding: 1em;
   font-size: 5vh;
+  font-family: "Inter", sans-serif;
 }
 
 .stream {
@@ -79,11 +79,14 @@
   padding: 0.5em;
   font-size: 1.5em;
   font-weight: bold;
+  color: white;
 }
 
 .scores-container {
   margin: 1em;
   font-size: 5vh;
+  text-transform: capitalize;
+  color: white;
 }
 
 .score, .high-score {
@@ -111,7 +114,7 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  font-family: "Inter", sans-serif;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .modal-header{
@@ -124,6 +127,7 @@
 .laugh-img{
   width: 25vh;
   height: 25vh;
+  filter: drop-shadow(10px 8px 4px rgba(0,0,0,0.2));
 }
 
 .modal-body {
@@ -135,7 +139,9 @@
 
 .modal-title{
   font-size: 4vh;
-  font-weight: bold;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
 }
 .modal-scores{
   text-align: left;
@@ -156,13 +162,14 @@
   margin: 0.75em;
   height: 30%;
   width: 30%;
-  border: 0.1em solid rgba(246, 172, 0, 0.883);
+  border: 2px solid rgba(246, 172, 0, 0.883);
   border-radius: 25px;
   background-color: rgba(246, 172, 0, 0.863);
   font-weight: bold;
   font-size: 2vh;
   cursor: pointer;
   -webkit-appearance: none;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
 }
 
 .modal-footer Button:hover{
@@ -198,8 +205,9 @@
     width: 20vh;
     height: 15vh;
     margin-bottom: 100%;
-    border: 7.5px solid #ffd42d ;
+    border: 5px solid #ffd42d ;
     border-radius: 30px;
+    object-fit: cover;
   }
 
   .cant-see-warning{

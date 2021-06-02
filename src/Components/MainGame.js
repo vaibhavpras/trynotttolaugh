@@ -128,8 +128,8 @@ export default function MainGame(props) {
             <text className="joke-text" ref={jokeTextRef} />
           </div>
           <div className="scores-container">
-            <text className="score">Score: {score}</text>
-            <text className="high-score">High Score: {highScore}</text>
+            <text className="score">score: {score}</text>
+            <text className="high-score">sigh score: {highScore}</text>
           </div>
         </div>
       ) : (
@@ -156,7 +156,7 @@ export default function MainGame(props) {
             </Modal.Header>
           </div>
           <Modal.Body className="modal-body">
-            <div className="modal-title">GOT YOU!</div>
+            <div className="modal-title">got you!</div>
             <div className="modal-scores">
               <div>score: {score}</div>
               <div>high score: {highScore}</div>

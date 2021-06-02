@@ -14,7 +14,7 @@ function Home() {
   //Keeps track of user's current selected joke choice
   const [selectState, selectStateSetter] = useState({
     label: "Any",
-    desc: "all kinds of jokes",
+    desc: "any joke",
   });
 
   //Handles form submit event
@@ -33,19 +33,19 @@ function Home() {
   const handleChange = (e) => {
     switch (e.target.value) {
       case "Any":
-        selectStateSetter({label: e.target.value, desc: "all kinds of jokes"});
+        selectStateSetter({label: e.target.value, desc: "any joke"});
         break;
       case "Programming":
-        selectStateSetter({label: e.target.value, desc: "programming jokes"});
+        selectStateSetter({label: e.target.value, desc: "CS jokes"});
         break;
       case "Pun":
-        selectStateSetter({ label: e.target.value, desc: "puns" });
+        selectStateSetter({ label: e.target.value, desc: "some puns" });
         break;
       case "Dark":
         selectStateSetter({ label: e.target.value, desc: "dark jokes" });
         break;
       default: 
-        selectStateSetter({label: e.target.value, desc: "all kinds of jokes"});
+        selectStateSetter({label: e.target.value, desc: "any joke"});
         break;
     }
   };
@@ -54,29 +54,28 @@ function Home() {
     <div className="outer-container">
       <div className="inner-container">
         <div className="card">
-          <p className="title">YOU LAUGH, YOU LOSE</p>
+          <p className="title">You Laugh, You Lose</p>
 
           <div className="prompt">
             <form onSubmit={handleSubmit} id="startForm">
-              <label> I find </label>
+              <label>Tell me </label>
               <select
                 className="dropdown"
                 value={selectState.label}
                 onChange={handleChange}
                 style={{ width: `${0.5 * selectState.desc.length + 0.9}em` }}>
-                <option value="Any">all kinds of jokes</option>
-                <option value="Programming">programming jokes</option>
-                <option value="Pun">puns</option>
+                <option value="Any">any joke</option>
+                <option value="Programming">CS jokes</option>
+                <option value="Pun">some puns</option>
                 <option value="Dark">dark jokes</option>
               </select>
-              <label> funny. </label>
             </form>
           </div>
           <div className="submit-btn-container">
             <input
               form="startForm"
               type="submit"
-              value="start"
+              value="Start"
               className="submit-btn"
             ></input>
           </div>
@@ -84,13 +83,13 @@ function Home() {
 
         <div className="disclaimer">
           <p>
-            Disclaimer: You need to enable your web camera to be able to play
+            You need to enable your web camera to be able to play
             this game.
           </p>
           <p>
             Also note, this site does not connect to a backend server, which
             means your video feed is analyzed only inside your browser and the
-            data stays only on your device.
+            data never leaves your browser or your device.
           </p>
         </div>
       </div>
