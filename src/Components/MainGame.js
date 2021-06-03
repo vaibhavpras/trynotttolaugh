@@ -75,9 +75,11 @@ export default function MainGame(props) {
             await delay(5000);
           } else return;
         } else if (json.type === "single") {
+          if (window.RUNNING) {
           jokeTextRef.innerHTML = json.delivery;
           await delay(5000);
-        }
+          }else return;
+        } 
       }
       if (window.RUNNING) {
         setScore((prevState) => prevState + 10); //Increment score by 10 after each successful (smile-less) pass through of jokes
@@ -102,8 +104,6 @@ export default function MainGame(props) {
     jokeTextRef.current.innerHTML = "";
     setScore(0);
     setShowGameOverModal(false);
-    window.RUNNING = true;
-    fetchAndNarrate();
     emotionDetectionRef.current.startEmotionDetection();
   };
 
