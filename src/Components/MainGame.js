@@ -76,10 +76,10 @@ export default function MainGame(props) {
           } else return;
         } else if (json.type === "single") {
           if (window.RUNNING) {
-          jokeTextRef.innerHTML = json.delivery;
-          await delay(5000);
-          }else return;
-        } 
+            jokeTextRef.innerHTML = json.delivery;
+            await delay(5000);
+          } else return;
+        }
       }
       if (window.RUNNING) {
         setScore((prevState) => prevState + 10); //Increment score by 10 after each successful (smile-less) pass through of jokes
@@ -117,8 +117,16 @@ export default function MainGame(props) {
 
   //check for highscore on each score change
   useEffect(() => {
-    if (score > highScore) setHighScore(score);
+    if (score > highScore) { //if high score,
+      setHighScore(score); //update state
+      localStorage.setItem('highScore', score); //update local storage
+    }
   }, [score]);
+
+  useEffect(() => {
+    if(localStorage.getItem('highScore'))
+      setHighScore(localStorage.getItem('highScore')); //retrieve high score from local stroage
+  }, [])
 
   return (
     <div className="outer-container">
@@ -129,12 +137,12 @@ export default function MainGame(props) {
           </div>
           <div className="scores-container">
             <text className="score">score: {score}</text>
-            <text className="high-score">sigh score: {highScore}</text>
+            <text className="high-score">high score: {highScore}</text>
           </div>
         </div>
       ) : (
         <div className="loading-animation">
-            <Pulse />
+          <Pulse />
         </div>
       )}
       <EmotionDetection
