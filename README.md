@@ -38,7 +38,6 @@ You Laugh, You Lose! is a web-based game where your objective is to not laugh at
 
 * [Node Package Manager](https://nodejs.org/en/)
 * [Create-React-App](https://github.com/facebook/create-react-app)
-* [Face-API.js](https://justadudewhohacks.github.io/face-api.js/docs/index.html)
  
 ### Installation
 
